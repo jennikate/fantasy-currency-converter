@@ -17,6 +17,9 @@ module.exports = {
       {
         test: /\.(js|jsx)$/, // .js and .jsx files
         exclude: /node_modules/, // excluding the node_modules folder
+        resolve: {
+          extensions: [".js", ".jsx"]
+        },
         use: {
           loader: "babel-loader",
         },
@@ -36,6 +39,6 @@ module.exports = {
     // in order to use `<Router>`, historyApiFallback needs to be enabled
     historyApiFallback: true,
     hot: true,
-    port: 8080,
+    port: 8080
   },
 };

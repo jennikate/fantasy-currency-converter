@@ -1,7 +1,14 @@
 import React from 'react';
+import Converter from './components/Converter';
+import Header from './components/Header';
+
+
 const App = () => {
   return (
-    <h1>Hello</h1>
+    <>
+      <Header />
+      <Converter />
+    </>
   )
 };
 
