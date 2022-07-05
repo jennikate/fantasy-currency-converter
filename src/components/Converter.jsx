@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GAME_DND, GAME_WOW } from '../constants/config';
 import { GameContext } from '../context/GameContext';
 
@@ -12,10 +12,16 @@ const Converter = () => {
   const [goldInCopper, setGoldInCopper] = useState();
   const { game, setGame } = useContext(GameContext);
 
+
   function handleGameChange(e) {
     setGame(e.target.value); // this is where we're setting our GameContext
+  };
 
-    switch (e.target.value) {
+  // having the switch in the useEffect ensures that
+  // the initial load of the page has component state set based
+  // on the GameContext
+  useEffect(() => {
+    switch (game) {
       case GAME_WOW: {
         setGoldInSilver(CONVERSION_WOW);
         setGoldInCopper(CONVERSION_WOW * CONVERSION_WOW)
@@ -31,7 +37,7 @@ const Converter = () => {
         setGoldInCopper();
       }
     }
-  };
+  }, [game])
 
   return (
     <>
