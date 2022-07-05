@@ -1,43 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { GAME_DND, GAME_WOW } from '../constants/config';
 import { GameContext } from '../context/GameContext';
-
-const CONVERSION_WOW = 100;
-const CONVERSION_DND = 10;
-
-
+import ConversionRate from './ConversionRate';
 
 const Converter = () => {
-  const [goldInSilver, setGoldInSilver] = useState();
-  const [goldInCopper, setGoldInCopper] = useState();
   const { game, setGame } = useContext(GameContext);
-
 
   function handleGameChange(e) {
     setGame(e.target.value); // this is where we're setting our GameContext
   };
-
-  // having the switch in the useEffect ensures that
-  // the initial load of the page has component state set based
-  // on the GameContext
-  useEffect(() => {
-    switch (game) {
-      case GAME_WOW: {
-        setGoldInSilver(CONVERSION_WOW);
-        setGoldInCopper(CONVERSION_WOW * CONVERSION_WOW)
-      }
-        break;
-      case GAME_DND: {
-        setGoldInSilver(CONVERSION_DND);
-        setGoldInCopper(CONVERSION_DND * CONVERSION_DND);
-      }
-        break;
-      default: {
-        setGoldInSilver();
-        setGoldInCopper();
-      }
-    }
-  }, [game])
 
   return (
     <>
@@ -53,7 +24,7 @@ const Converter = () => {
                   type="radio"
                   value={GAME_WOW}
                   checked={game === GAME_WOW ? 'checked' : ''}
-                  onChange={handleGameChange}
+                  onChange={(e) => { setGame(e.target.value) }}
                 />
                 <label htmlFor={GAME_WOW}>
                   World of Warcraft
@@ -66,7 +37,7 @@ const Converter = () => {
                   type="radio"
                   value={GAME_DND}
                   checked={game === GAME_DND ? 'checked' : ''}
-                  onChange={handleGameChange}
+                  onChange={(e) => { setGame(e.target.value) }}
                 />
                 <label htmlFor={GAME_DND}>
                   Dungeons &amp; Dragons
@@ -77,8 +48,7 @@ const Converter = () => {
         </div>
       </div>
 
-      <h3>Conversion Rate</h3>
-      {goldInSilver && <p>{`1 gold is equal to ${goldInSilver} silver or ${goldInCopper} copper`}</p>}
+      <ConversionRate game={game} />
 
 
       <ul>
