@@ -6,10 +6,6 @@ import ConversionRate from './ConversionRate';
 const Converter = () => {
   const { game, setGame } = useContext(GameContext);
 
-  function handleGameChange(e) {
-    setGame(e.target.value); // this is where we're setting our GameContext
-  };
-
   return (
     <>
       <div className="container body">
