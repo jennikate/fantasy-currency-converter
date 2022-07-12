@@ -1,15 +1,10 @@
 import React from 'react';
-import Converter from './components/Converter';
-import Header from './components/Header'
-import Layout from './components/Layout';
+import Layout from './components/Container';
 
 const App = () => {
 
   return (
-    <Layout>
-      <Header />
-      <Converter />
-    </Layout>
+    <Layout />
   )
 };
 

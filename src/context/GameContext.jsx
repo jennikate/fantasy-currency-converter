@@ -1,9 +1,8 @@
 import React, { createContext, useState } from 'react';
-// import useGame from '../hooks/useGame';
 
 // we want to make this context available across the app
 // so it can be used for obtaining classes, calculations, and content
-export const GameContext = createContext();
+export const GameContext = createContext(); // initialise the context
 
 const GameProvider = ({ startingGame, children }) => {
   // you could extract this out to a hook (e.g useGame for state setting)
@@ -11,6 +10,7 @@ const GameProvider = ({ startingGame, children }) => {
   // but as it's only a single state item it seems overly complex to separate it out
   const [game, setGame] = useState(startingGame); 
 
+  // Use the Context Provider to wrap the tree of components that need the state Context.
   return (
     <GameContext.Provider value={{ setGame, game }}>
       {children}
@@ -19,6 +19,15 @@ const GameProvider = ({ startingGame, children }) => {
 }
 
 export { GameProvider };
+
+// We want to provide the app with a default (starting) gameContext
+// And then we want to allow the entire app use of the GameContext
+// We do this by creating Container.jsx
+// within Container we will then define the structure of the app, including nav if needed
+// and then in App.js we only need to call the Container component, everything else lives within
+
+// we could rename Container to Main or Layout or whatever makes sense for the App
+
 
 
 

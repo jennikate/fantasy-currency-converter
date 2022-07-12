@@ -7,8 +7,7 @@ const Header = () => {
   return (
     <div className="main">
       <div className="container header">
-        header to just contain a nice name and banner
-        {`the game chosen is ${game}`}
+        {`The game chosen is ${game}`}
       </div>
     </div>
   )

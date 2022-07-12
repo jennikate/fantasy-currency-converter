@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { GAME_WOW } from '../constants/config';
-import { GameContext, GameProvider } from '../context/GameContext';
+import { GameProvider } from '../context/GameContext';
+import Converter from './Converter';
+import Header from './Header'
 
-
-const Layout = ({ children }) => {
-  // const { game } = useContext(GameContext);
+const Layout = () => {
 
   return (
     <GameProvider startingGame={GAME_WOW}>
-      {children}
+      <Header />
+      <Converter />
     </GameProvider>
   );
 }
