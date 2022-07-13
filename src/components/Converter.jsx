@@ -73,8 +73,6 @@ const Converter = () => {
     convertValues(formData);
   };
 
-  console.log(convertedValues)
-
   return (
     <>
       <div id="game-selector">
@@ -161,14 +159,46 @@ const Converter = () => {
         </form>
       </div>
 
+      {Object.entries(convertedValues).length > 0 && (
+        <div id="result">
+          <h3>Conversion Results</h3>
+          <h4>Gold based</h4>
+          <ul className="results in-gold">
+            <li>
+              <span className="label">Gold</span>
+              <span className="amount">{convertedValues.inGold?.gold}</span>
+            </li>
+            <li>
+              <span className="label">Silver</span>
+              <span className="amount">{convertedValues.inGold.silver}</span>
+            </li>
+            <li>
+              <span className="label">Copper</span>
+              <span className="amount">{convertedValues.inGold.copper}</span>
+            </li>
+          </ul>
 
-      <ul>
-        <li>function to calculate</li>
-        <li>output in gold, silver, copper</li>
-        <li>silver and copper</li>
-        <li>just copper</li>
-        <li>Theme switcher</li>
-      </ul>
+          <h4>Silver based</h4>
+          <ul className="results in-silver">
+            <li>
+              <span className="label">Silver</span>
+              <span className="amount">{convertedValues.inSilver.silver}</span>
+            </li>
+            <li>
+              <span className="label">Copper</span>
+              <span className="amount">{convertedValues.inSilver.copper}</span>
+            </li>
+          </ul>
+
+          <h4>Copper based</h4>
+          <ul className="results in-copper">
+            <li>
+              <span className="label">Copper</span>
+              <span className="amount">{convertedValues.inCopper.copper}</span>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   )
 };
