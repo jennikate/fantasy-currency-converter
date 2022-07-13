@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from './components/Container';
+import Container from './components/Container';
 
 const App = () => {
 
   return (
-    <Layout />
+    <Container />
   )
 };
 
