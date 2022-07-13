@@ -6,7 +6,7 @@ import ConversionRate from './ConversionRate';
 
 const Converter = () => {
   const { game, setGame } = useContext(GameContext);
-  const { goldInSilver, goldInCopper } = useContext(ConversionContext);
+  const { conversionGoldInSilver, conversionGoldInCopper } = useContext(ConversionContext);
   const [formData, setFormData] = useState({});
 
   // stop the number fields from changing number on scroll
@@ -17,8 +17,16 @@ const Converter = () => {
   });
 
   function convertValues(value) {
-    console.log('convert', value);
-    console.log('game', goldInSilver);
+    // total value in silver
+    const convertedGold = value.gold ? parseInt(value.gold * conversionGoldInSilver) : 0;
+    const convertedSilver = value.silver ? parseInt(value.silver) : 0;
+    const convertedCopper = value.copper ? parseInt(value.copper / 100) : 0;
+
+    const convertedToSilver = convertedGold + convertedSilver + convertedCopper;
+    // get the remaining copper (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON)
+    const convertedToSilverRemainingCopper = value.copper ? Math.round((((value.copper / 100) - Math.floor(value.copper / 100)) + Number.EPSILON) * 100) : 0;
+
+    console.log(`SILVER: ${convertedToSilver}, with ${convertedToSilverRemainingCopper} copper remaining`);
 
   }
 

@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ConversionContext } from '../context/ConversionContext';
 
 const ConversionRate = () => {
-  const { goldInSilver, goldInCopper } = useContext(ConversionContext);
+  const { conversionGoldInSilver, conversionGoldInCopper } = useContext(ConversionContext);
   return (
     <>
       <h3>Conversion Rate</h3>
-      {goldInSilver && <p>{`1 gold is equal to ${goldInSilver} silver or ${goldInCopper} copper`}</p>}
+      {conversionGoldInSilver && <p>{`1 gold is equal to ${conversionGoldInSilver} silver or ${conversionGoldInCopper} copper`}</p>}
     </>
   );
 }
