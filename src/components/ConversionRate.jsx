@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { ConversionContext } from '../context/ConversionContext';
 
 const ConversionRate = () => {
-  const { goldInSilver, goldInCopper } = useContext(ConversionContext);
+  const { conversionRate } = useContext(ConversionContext);
   return (
     <>
       <h3>Conversion Rate</h3>
-      {goldInSilver && <p>{`1 gold is equal to ${goldInSilver} silver or ${goldInCopper} copper`}</p>}
+      {conversionRate && <p>{`1 gold is equal to ${conversionRate} silver or ${conversionRate * conversionRate} copper`}</p>}
     </>
   );
 }
