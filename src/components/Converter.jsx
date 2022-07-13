@@ -20,13 +20,13 @@ const Converter = () => {
     // total value in silver
     const convertedGold = value.gold ? parseInt(value.gold * conversionGoldInSilver) : 0;
     const convertedSilver = value.silver ? parseInt(value.silver) : 0;
-    const convertedCopper = value.copper ? parseInt(value.copper / 100) : 0;
+    const convertedCopper = value.copper ? value.copper / conversionGoldInSilver : 0;
 
-    const convertedToSilver = convertedGold + convertedSilver + convertedCopper;
-    // get the remaining copper (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON)
-    const convertedToSilverRemainingCopper = value.copper ? Math.round((((value.copper / 100) - Math.floor(value.copper / 100)) + Number.EPSILON) * 100) : 0;
+    const convertedToSilver = convertedGold + convertedSilver + parseInt(convertedCopper);
+    // Math.floor returns just the amount before the decimal
+    const remainingCopper = parseInt((convertedCopper - Math.floor(convertedCopper)) * 100)
 
-    console.log(`SILVER: ${convertedToSilver}, with ${convertedToSilverRemainingCopper} copper remaining`);
+    console.log(`SILVER: ${convertedToSilver}, with ${remainingCopper} copper remaining`);
 
   }
 
