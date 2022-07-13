@@ -6,7 +6,8 @@ import ConversionRate from './ConversionRate';
 
 const Converter = () => {
   const { game, setGame } = useContext(GameContext);
-  const { conversionGoldInSilver, conversionGoldInCopper } = useContext(ConversionContext);
+  const { conversionRate } = useContext(ConversionContext);
+  const [convertedValues, setConvertedValues] = useState({});
   const [formData, setFormData] = useState({});
 
   // stop the number fields from changing number on scroll
@@ -17,28 +18,51 @@ const Converter = () => {
   });
 
   function convertValues(value) {
-    // total value in silver
-    const convertedGold = value.gold ? parseInt(value.gold * conversionGoldInSilver) : 0;
-    const convertedSilver = value.silver ? parseInt(value.silver) : 0;
-    const convertedCopper = value.copper ? value.copper / conversionGoldInSilver : 0;
+    // get original values
+    const gold = parseInt(value.gold) || 0;
+    const silver = parseInt(value.silver) || 0;
+    const copper = parseInt(value.copper) || 0;
 
-    const convertedToSilver = convertedGold + convertedSilver + parseInt(convertedCopper);
-    // Math.floor returns just the amount before the decimal
-    const remainingCopper = parseInt((convertedCopper - Math.floor(convertedCopper)) * 100)
+    // convert to silver
+    const goldInSilver = gold * conversionRate;
+    const copperInSilver = copper / conversionRate; // raw conversion
+    const copperRemaining = parseInt((copperInSilver - Math.floor(copperInSilver)) * conversionRate); // (numWithDecimal - wholePartOfNum), * 100 to make full number, parse to convert into whole number
+    const amountInSilver = goldInSilver + silver + parseInt(copperInSilver);
 
-    console.log(`SILVER: ${convertedToSilver}, with ${remainingCopper} copper remaining`);
+    // convert to copper
+    const goldInCopper = (gold * conversionRate) * conversionRate;
+    const silverInCopper = silver * conversionRate;
+    const amountInCopper = goldInCopper + silverInCopper + copper;
 
-  }
+    const result = {
+      original: { 
+        gold: gold, 
+        silver: silver, 
+        copper: copper,
+      },
+      inSilver: {
+        silver: amountInSilver,
+        copper: copperRemaining,
+      },
+      inCopper: {
+        copper: amountInCopper,
+      }
+    }
+
+    setConvertedValues(result);
+  };
 
   function handleChange(e) {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     convertValues(formData);
-  }
+  };
+
+  console.log(convertedValues)
 
   return (
     <>

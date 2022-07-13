@@ -5,31 +5,27 @@ import { GameContext } from '../context/GameContext';
 export const ConversionContext = createContext();
 
 const ConversionProvider = ({ children }) => {
-  const [conversionGoldInSilver, setconversionGoldInSilver] = useState();
-  const [conversionGoldInCopper, setconversionGoldInCopper] = useState();
+  const [conversionRate, setconversionRate] = useState();
   const { game } = useContext(GameContext);
 
   useEffect(() => {
     switch (game) {
       case GAME_WOW: {
-        setconversionGoldInSilver(CONVERSION_WOW);
-        setconversionGoldInCopper(CONVERSION_WOW * CONVERSION_WOW)
+        setconversionRate(CONVERSION_WOW);
       }
         break;
       case GAME_DND: {
-        setconversionGoldInSilver(CONVERSION_DND);
-        setconversionGoldInCopper(CONVERSION_DND * CONVERSION_DND);
+        setconversionRate(CONVERSION_DND);
       }
         break;
       default: {
-        setconversionGoldInSilver();
-        setconversionGoldInCopper();
+        setconversionRate();
       }
     }
   }, [game]);
 
   return (
-    <ConversionContext.Provider value={{ conversionGoldInSilver, conversionGoldInCopper }}>
+    <ConversionContext.Provider value={{ conversionRate }}>
       {children}
     </ConversionContext.Provider>
   );
