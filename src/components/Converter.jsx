@@ -23,22 +23,33 @@ const Converter = () => {
     const silver = parseInt(value.silver) || 0;
     const copper = parseInt(value.copper) || 0;
 
-    // convert to silver
-    const goldInSilver = gold * conversionRate;
-    const copperInSilver = copper / conversionRate; // raw conversion
-    const copperRemaining = parseInt((copperInSilver - Math.floor(copperInSilver)) * conversionRate); // (numWithDecimal - wholePartOfNum), * 100 to make full number, parse to convert into whole number
-    const amountInSilver = goldInSilver + silver + parseInt(copperInSilver);
-
     // convert to copper
     const goldInCopper = (gold * conversionRate) * conversionRate;
     const silverInCopper = silver * conversionRate;
     const amountInCopper = goldInCopper + silverInCopper + copper;
 
+    // convert to silver
+    const goldInSilver = gold * conversionRate;
+    const copperInSilver = copper / conversionRate; // raw conversion
+    const copperRemaining = Math.round((copperInSilver - Math.floor(copperInSilver)) * conversionRate); // (numWithDecimal - wholePartOfNum), * 100 to make full number, parse to convert into whole number
+    const amountInSilver = goldInSilver + silver + parseInt(copperInSilver);
+
+    // conver to gold
+    const totalSilver = silver + Math.floor(copperInSilver);
+    const silverInGold = totalSilver / conversionRate; // raw conversion
+    const silverRemaining = Math.round((silverInGold - Math.floor(silverInGold)) * conversionRate);
+    const amountInGold = gold + parseInt(silverInGold);
+
     const result = {
-      original: { 
-        gold: gold, 
-        silver: silver, 
+      entered: {
+        gold: gold,
+        silver: silver,
         copper: copper,
+      },
+      inGold: {
+        gold: amountInGold,
+        silver: silverRemaining,
+        copper: copperRemaining,
       },
       inSilver: {
         silver: amountInSilver,
