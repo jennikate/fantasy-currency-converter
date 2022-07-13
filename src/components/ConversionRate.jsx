@@ -9,7 +9,7 @@ const ConversionRate = () => {
 
   // having the switch in the useEffect ensures that
   // the initial load of the page has component state set based
-  // on the GameContext
+  // on the GameContext as well as updating any time the value of `game` changes
   useEffect(() => {
     switch (game) {
       case GAME_WOW: {

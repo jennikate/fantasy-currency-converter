@@ -26,8 +26,7 @@ export { GameProvider };
 // within Container we will then define the structure of the app, including nav if needed
 // and then in App.js we only need to call the Container component, everything else lives within
 
-// we could rename Container to Main or Layout or whatever makes sense for the App
-
+// We could rename Container to Main or Layout or whatever makes sense for the App
 
 
 
