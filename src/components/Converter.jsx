@@ -1,17 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { GAME_DND, GAME_WOW } from '../constants/config';
+import { ConversionContext } from '../context/ConversionContext';
 import { GameContext } from '../context/GameContext';
 import ConversionRate from './ConversionRate';
 
 const Converter = () => {
   const { game, setGame } = useContext(GameContext);
+  const { goldInSilver, goldInCopper } = useContext(ConversionContext);
+  const [formData, setFormData] = useState({});
 
   // stop the number fields from changing number on scroll
-  document.addEventListener("wheel", function (event) {
+  document.addEventListener("wheel", function (e) {
     if (document.activeElement.type === "number") {
       document.activeElement.blur();
     }
   });
+
+  function convertValues(value) {
+    console.log('convert', value);
+    console.log('game', goldInSilver);
+
+  }
+
+  function handleChange(e) {
+    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    convertValues(formData);
+  }
 
   return (
     <>
@@ -60,8 +79,9 @@ const Converter = () => {
               </label>
               <input
                 id="inputGold"
-                name="inputGold"
+                name="gold"
                 type="number"
+                onChange={handleChange}
               />
             </li>
             <li>
@@ -70,8 +90,9 @@ const Converter = () => {
               </label>
               <input
                 id="inputSilver"
-                name="inputSilver"
+                name="silver"
                 type="number"
+                onChange={handleChange}
               />
             </li>
 
@@ -81,19 +102,24 @@ const Converter = () => {
               </label>
               <input
                 id="inputCopper"
-                name="inputCopper"
+                name="copper"
                 type="number"
+                onChange={handleChange}
               />
             </li>
           </ul>
-
+          <button
+            type="submit"
+            id="convertValues"
+            onClick={handleSubmit}
+          >
+            Convert
+          </button>
         </form>
       </div>
 
 
       <ul>
-        <li>form to enter gold silver copper amount</li>
-        <li>button to convert</li>
         <li>function to calculate</li>
         <li>output in gold, silver, copper</li>
         <li>silver and copper</li>
