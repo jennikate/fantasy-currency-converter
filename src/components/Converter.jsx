@@ -74,8 +74,9 @@ const Converter = () => {
   };
 
   return (
-    <>
-      <div id="game-selector">
+    <div className="container">
+      <div className="content">
+      <div id="game-selector" className="full">
         <h2>Select your game</h2>
         <form id="gameSelector">
           <ul className="radios">
@@ -111,7 +112,7 @@ const Converter = () => {
 
       <ConversionRate game={game} />
 
-      <div id="amount-to-convert">
+      <div id="amount-to-convert" className="full">
         <form>
           <ul>
             <li>
@@ -160,7 +161,7 @@ const Converter = () => {
       </div>
 
       {Object.entries(convertedValues).length > 0 && (
-        <div id="result">
+        <div id="result" className="full">
           <h3>Conversion Results</h3>
           <h4>Gold based</h4>
           <ul className="results in-gold">
@@ -199,7 +200,8 @@ const Converter = () => {
           </ul>
         </div>
       )}
-    </>
+      </div>
+    </div>
   )
 };
 
