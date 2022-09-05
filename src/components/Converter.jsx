@@ -76,130 +76,133 @@ const Converter = () => {
   return (
     <div className="container">
       <div className="content">
-      <div id="game-selector" className="full">
-        <h2>Select your game</h2>
-        <form id="gameSelector">
-          <ul className="radios">
-            <li>
-              <input
-                id={GAME_WOW}
-                name="selectGame"
-                type="radio"
-                value={GAME_WOW}
-                checked={game === GAME_WOW ? 'checked' : ''}
-                onChange={(e) => { setGame(e.target.value) }}
-              />
-              <label htmlFor={GAME_WOW}>
-                World of Warcraft
-              </label>
-            </li>
-            <li>
-              <input
-                id={GAME_DND}
-                name="selectGame"
-                type="radio"
-                value={GAME_DND}
-                checked={game === GAME_DND ? 'checked' : ''}
-                onChange={(e) => { setGame(e.target.value) }}
-              />
-              <label htmlFor={GAME_DND}>
-                Dungeons &amp; Dragons
-              </label>
-            </li>
-          </ul>
-        </form>
-      </div>
 
-      <ConversionRate game={game} />
+        <ConversionRate game={game} />
 
-      <div id="amount-to-convert" className="full">
-        <form>
-          <ul>
-            <li>
-              <label htmlFor="inputGold">
-                Gold
-              </label>
-              <input
-                id="inputGold"
-                name="gold"
-                type="number"
-                onChange={handleChange}
-              />
-            </li>
-            <li>
-              <label htmlFor="inputSilver">
-                Silver
-              </label>
-              <input
-                id="inputSilver"
-                name="silver"
-                type="number"
-                onChange={handleChange}
-              />
-            </li>
+        <div id="amount-to-convert" className="full">
+          <form>
+            <ul className="inputAmounts">
+              <li>
+                <input
+                  id="inputGold"
+                  name="gold"
+                  type="number"
+                  onChange={handleChange}
+                />
+                <label htmlFor="inputGold">
+                  Gold
+                </label>
+              </li>
+              <li>
+                <input
+                  id="inputSilver"
+                  name="silver"
+                  type="number"
+                  onChange={handleChange}
+                />
+                <label htmlFor="inputSilver">
+                  Silver
+                </label>
+              </li>
 
-            <li>
-              <label htmlFor="inputCopper">
-                Copper
-              </label>
-              <input
-                id="inputCopper"
-                name="copper"
-                type="number"
-                onChange={handleChange}
-              />
-            </li>
-          </ul>
-          <button
-            type="submit"
-            id="convertValues"
-            onClick={handleSubmit}
-          >
-            Convert
-          </button>
-        </form>
-      </div>
-
-      {Object.entries(convertedValues).length > 0 && (
-        <div id="result" className="full">
-          <h3>Conversion Results</h3>
-          <h4>Gold based</h4>
-          <ul className="results in-gold">
-            <li>
-              <span className="label">Gold</span>
-              <span className="amount">{convertedValues.inGold?.gold}</span>
-            </li>
-            <li>
-              <span className="label">Silver</span>
-              <span className="amount">{convertedValues.inGold.silver}</span>
-            </li>
-            <li>
-              <span className="label">Copper</span>
-              <span className="amount">{convertedValues.inGold.copper}</span>
-            </li>
-          </ul>
-
-          <h4>Silver based</h4>
-          <ul className="results in-silver">
-            <li>
-              <span className="label">Silver</span>
-              <span className="amount">{convertedValues.inSilver.silver}</span>
-            </li>
-            <li>
-              <span className="label">Copper</span>
-              <span className="amount">{convertedValues.inSilver.copper}</span>
-            </li>
-          </ul>
-
-          <h4>Copper based</h4>
-          <ul className="results in-copper">
-            <li>
-              <span className="label">Copper</span>
-              <span className="amount">{convertedValues.inCopper.copper}</span>
-            </li>
-          </ul>
+              <li>
+                <input
+                  id="inputCopper"
+                  name="copper"
+                  type="number"
+                  onChange={handleChange}
+                />
+                <label htmlFor="inputCopper">
+                  Copper
+                </label>
+              </li>
+            </ul>
+            <button
+              type="submit"
+              id="convertValues"
+              onClick={handleSubmit}
+            >
+              Convert
+            </button>
+          </form>
         </div>
-      )}
+
+        {Object.entries(convertedValues).length > 0 && (
+          <div id="result" className="full">
+            <h3>Conversion Results</h3>
+            <h4>Gold based</h4>
+            <ul className="results in-gold">
+              <li>
+                <span className="label">Gold</span>
+                <span className="amount">{convertedValues.inGold?.gold}</span>
+              </li>
+              <li>
+                <span className="label">Silver</span>
+                <span className="amount">{convertedValues.inGold.silver}</span>
+              </li>
+              <li>
+                <span className="label">Copper</span>
+                <span className="amount">{convertedValues.inGold.copper}</span>
+              </li>
+            </ul>
+
+            <h4>Silver based</h4>
+            <ul className="results in-silver">
+              <li>
+                <span className="label">Silver</span>
+                <span className="amount">{convertedValues.inSilver.silver}</span>
+              </li>
+              <li>
+                <span className="label">Copper</span>
+                <span className="amount">{convertedValues.inSilver.copper}</span>
+              </li>
+            </ul>
+
+            <h4>Copper based</h4>
+            <ul className="results in-copper">
+              <li>
+                <span className="label">Copper</span>
+                <span className="amount">{convertedValues.inCopper.copper}</span>
+              </li>
+            </ul>
+          </div>
+        )}
+
+
+        <div id="game-selector" className="full">
+          <h3>Change game</h3>
+          <form id="gameSelector">
+            <ul className="radios">
+              <li>
+                <input
+                  id={GAME_WOW}
+                  name="selectGame"
+                  type="radio"
+                  value={GAME_WOW}
+                  checked={game === GAME_WOW ? 'checked' : ''}
+                  onChange={(e) => { setGame(e.target.value) }}
+                />
+                <label htmlFor={GAME_WOW}>
+                  World of Warcraft
+                </label>
+              </li>
+              <li>
+                <input
+                  id={GAME_DND}
+                  name="selectGame"
+                  type="radio"
+                  value={GAME_DND}
+                  checked={game === GAME_DND ? 'checked' : ''}
+                  onChange={(e) => { setGame(e.target.value) }}
+                />
+                <label htmlFor={GAME_DND}>
+                  Dungeons &amp; Dragons
+                </label>
+              </li>
+            </ul>
+          </form>
+        </div>
+
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ const ConversionRate = () => {
   const { conversionRate } = useContext(ConversionContext);
   return (
     <div className="full">
-      <h3>Conversion Rate</h3>
+      <h2>Conversion Rate</h2>
       {conversionRate && <p>{`1 gold is equal to ${conversionRate} silver or ${conversionRate * conversionRate} copper`}</p>}
     </div>
   );
