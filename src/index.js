@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
 import App from './App';
-import './App.scss';
 
 // Below is the new React18 syntax
 const rootElement = document.getElementById('app');

@@ -7,7 +7,7 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "eslint \"**/*.{js,jsx}\" -f table",
-      "test": "jest --coverage"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "modern-css-reset": "^1.4.0",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
